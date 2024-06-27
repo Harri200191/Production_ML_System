@@ -6,3 +6,9 @@ Mainly, the idea was to create an automated workflow containing the following st
 - Feature Pipeline
 - Training Pipeline
 - Inference Pipeline
+
+To run the repo, create a conda environment using this command in the terminal:
+
+```bash
+conda env create -f environment.yml
+```
