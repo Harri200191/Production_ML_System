@@ -1,0 +1,11 @@
+version: '3.10'
+name: redpanda-cluster
+services:
+  redpanda:
+    container_name: redpanda
+    image: docker.redpanda.com/redpandadata/redpanda:latest
+  console:
+    container_name: redpanda-console
+    image: docker.redpanda.com/redpandadata/console:v2.3.8 
+    depends_on:
+      - redpanda
