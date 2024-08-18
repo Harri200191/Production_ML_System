@@ -1,2 +1,6 @@
 *.env
 *.pyc
+*.png
+*.jpg
+*.jpeg
+/main/data
