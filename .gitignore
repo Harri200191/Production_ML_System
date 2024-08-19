@@ -4,3 +4,4 @@
 *.jpg
 *.jpeg
 /main/data
+/frontend/node_modules

@@ -37,9 +37,8 @@ class Config():
         "IMAGES_DIR" : get("IMAGES_DIR", "../data/tiny-imagenet-200/train"),
     }
 
-    MODEL_CONFIGS = {
-        "CLIP_MODEL_NAME" : get("CLIP_MODEL_NAME", "ViT-B/32"),
-        "MODEL_CHOICES_JSON": get("MODEL_CHOICES_JSON", "../assets/model_choices.json"),
+    MODEL_CONFIGS = { 
+        "MODEL_CHOICES_JSON": get("MODEL_CHOICES_JSON", "./assets/model_choices.json"),
         "DEVICE" : get("DEVICE", "cuda"),
         "CHROMA_VERSION" : get("CHROMA_VERSION", "clip_v0.0"),
         "SIMILARITY_ALGO" : get("SIMILARITY_ALGO", "l2"), 

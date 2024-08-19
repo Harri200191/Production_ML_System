@@ -11,7 +11,7 @@ Configurations = Config()
 class ClipEmbeddingsfunction(EmbeddingFunction):
     def __init__(
             self, 
-            model_name: str = f"{Configurations.MODEL_CONFIGS["CLIP_MODEL_NAME"]}", 
+            model_name: str, 
             device: str = Configurations.MODEL_CONFIGS["DEVICE"]
         ):  
 

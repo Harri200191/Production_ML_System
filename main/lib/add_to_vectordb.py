@@ -1,16 +1,15 @@
 import os
 from chromadb import Client, Settings
-from clip_embeddings import ClipEmbeddingsfunction
-from typing import List   
 
+from lib.clip_embeddings import ClipEmbeddingsfunction
 from lib.config import Config 
 from lib.data_extraction import DataExtraction
 
 class DataEmbeddings:
-    def __init__(self):
+    def __init__(self, modelName):
         self.configurations = Config()
         self.data_extraction = DataExtraction()
-        self.embedding_function = ClipEmbeddingsfunction()
+        self.embedding_function = ClipEmbeddingsfunction(model_name=modelName)
         self.client = Client(settings = Settings(is_persistent=True, persist_directory="./clip_chroma"))
         self.collection = self.create_collection()
 
@@ -20,9 +19,9 @@ class DataEmbeddings:
         """
 
         collection = self.client.get_or_create_collection(
-            name = f"{self.configurations.MODEL_CONFIGS["CHROMA_VERSION"]}", 
+            name = self.configurations.MODEL_CONFIGS["CHROMA_VERSION"], 
             embedding_function = self.embedding_function,
-            metadata= {f"hnsw:space": f"{self.configurations.MODEL_CONFIGS["SIMILARITY_ALGO"]}"}
+            metadata= {f"hnsw:space": self.configurations.MODEL_CONFIGS["SIMILARITY_ALGO"]}
         )
 
         return collection 
