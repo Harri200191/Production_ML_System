@@ -21,9 +21,9 @@ class ClipEmbeddingsfunction(EmbeddingFunction):
                 device (str, optional): The device to use for inference (e.g., "cpu" or "cuda"). Defaults to "cpu".
         """
 
-        self.model, self.preprocess = clip.load(model_name, self.device)
         self.configurations = Config()
         self.device = self.configurations.MODEL_CONFIGS["DEVICE"]
+        self.model, self.preprocess = clip.load(model_name, self.device)
 
     def __call__(self, input: Documents)-> Embeddings:
         """

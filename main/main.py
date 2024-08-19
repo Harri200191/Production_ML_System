@@ -18,7 +18,7 @@ def parse_args():
 
     parser.add_argument('--model-name', type=str, choices=model_choices,
                         required=True, help='Models to train')  
-    parser.add_argument('--add_to_db', type=int, default=0,
+    parser.add_argument('--add_to_db', type=int, default=0, choices= [0, 1],
                         help='Start Training or Not') 
     parser.add_argument('--device', type=int, nargs='+', required=False,
                         default=[0], help='Device(s) to use for training (e.g., [0], [0,1])')
@@ -26,12 +26,11 @@ def parse_args():
     return parser.parse_args()
  
 if __name__ == "__main__":
-    arguments = parse_args()
-    print(arguments)
+    arguments = parse_args() 
 
     data_embed = DataEmbeddings(arguments.model_name)
 
-    if arguments.add_to_db: 
+    if arguments.add_to_db == 1: 
         data_embed.add_embeddings_to_chroma()
  
     

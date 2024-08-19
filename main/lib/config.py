@@ -32,9 +32,9 @@ def get_list(item, default=None):
 class Config():
     '''Load variables from .env file'''
     DATASET_CONFIGS = {
-        "LABELS_TXT_PATH" : get("LABELS_TXT_PATH", "../data/tiny-imagenet-200/words.txt"),
-        "LABELS_DICT_JSON_PATH" : get("LABELS_DICT_JSON_PATH", "../assets/labels_dict.json"),
-        "IMAGES_DIR" : get("IMAGES_DIR", "../data/tiny-imagenet-200/train"),
+        "LABELS_TXT_PATH" : get("LABELS_TXT_PATH", "data/tiny-imagenet-200/words.txt"),
+        "LABELS_DICT_JSON_PATH" : get("LABELS_DICT_JSON_PATH", "assets/labels_dict.json"),
+        "IMAGES_DIR" : get("IMAGES_DIR", "data/tiny-imagenet-200/train"),
     }
 
     MODEL_CONFIGS = { 

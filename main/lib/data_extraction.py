@@ -29,9 +29,6 @@ class DataExtraction:
         
         data = pd.read_csv(file_path, sep="\t", header=0, names=["ID", "Class"])
         labels = data["Class"].unique()
-        
-        # Read the data from the text file
-        data = pd.read_csv(file_path, sep=" ", header=None)
 
         # Create a dictionary to store the mapping
         for value in data.values:
@@ -57,7 +54,7 @@ class DataExtraction:
                 list: A list of labels
         """
         
-        # Check if the file exists
+        # Check if the folder exists 
         if not os.path.exists(folder_path):
             raise Exception("Directory not found")
         
