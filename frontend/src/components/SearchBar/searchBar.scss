@@ -1,0 +1,70 @@
+$primary-color: #4285f4;
+$secondary-color: #f8f9fa;
+$border-radius: 24px;
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: $secondary-color;
+  padding: 0 20px;
+
+  .tool-name {
+    font-size: 48px;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 20px;
+
+    @media (max-width: 768px) {
+      font-size: 36px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 28px;
+    }
+  }
+
+  .search-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+
+    input {
+      flex: 1;
+      padding: 12px 20px;
+      font-size: 18px;
+      border: 2px solid $primary-color;
+      border-radius: $border-radius 0 0 $border-radius;
+      outline: none;
+
+      @media (max-width: 480px) {
+        font-size: 16px;
+        padding: 10px 15px;
+      }
+    }
+
+    button {
+      padding: 12px 20px;
+      font-size: 18px;
+      border: 2px solid $primary-color;
+      border-left: none;
+      background-color: $primary-color;
+      color: #fff;
+      border-radius: 0 $border-radius $border-radius 0;
+      cursor: pointer;
+
+      @media (max-width: 480px) {
+        font-size: 16px;
+        padding: 10px 15px;
+      }
+
+      &:hover {
+        background-color: darken($primary-color, 10%);
+      }
+    }
+  }
+}

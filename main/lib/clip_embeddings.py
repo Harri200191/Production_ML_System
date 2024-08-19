@@ -6,13 +6,11 @@ from PIL import Image
 from chromadb import EmbeddingFunction, Documents, Embeddings
 
 from lib.config import Config
-Configurations = Config()
 
 class ClipEmbeddingsfunction(EmbeddingFunction):
     def __init__(
             self, 
-            model_name: str, 
-            device: str = Configurations.MODEL_CONFIGS["DEVICE"]
+            model_name: str
         ):  
 
         """
@@ -23,8 +21,9 @@ class ClipEmbeddingsfunction(EmbeddingFunction):
                 device (str, optional): The device to use for inference (e.g., "cpu" or "cuda"). Defaults to "cpu".
         """
 
-        self.device = device
         self.model, self.preprocess = clip.load(model_name, self.device)
+        self.configurations = Config()
+        self.device = self.configurations.MODEL_CONFIGS["DEVICE"]
 
     def __call__(self, input: Documents)-> Embeddings:
         """
@@ -41,7 +40,12 @@ class ClipEmbeddingsfunction(EmbeddingFunction):
 
         for image_path in input: 
             image = Image.open(image_path)
-            image = image.resize((64, 64))
+
+            image = image.resize(
+                (self.configurations.MODEL_CONFIGS["IMAGE_SIZE"], 
+                 self.configurations.MODEL_CONFIGS["IMAGE_SIZE"])
+            )
+
             image_input = self.preprocess(image).unsqueeze(0).to(self.device)
             with torch.no_grad():
                 embeddings = self.model.encode_image(image_input).cpu().detach().numpy()
@@ -63,7 +67,12 @@ class ClipEmbeddingsfunction(EmbeddingFunction):
 
         # Convert ndarray to PIL Image to handle resizing
         input_image = Image.fromarray(input)
-        input_image = input_image.resize((64, 64), Image.ANTIALIAS)
+
+        input_image = input_image.resize((
+            self.configurations.MODEL_CONFIGS["IMAGE_SIZE"], 
+            self.configurations.MODEL_CONFIGS["IMAGE_SIZE"]),
+            Image.ANTIALIAS
+        )
 
         # Preprocess the image and prepare for model input
         input_tensor = self.preprocess(input_image).unsqueeze(0).to(self.device)

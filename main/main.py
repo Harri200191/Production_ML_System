@@ -29,10 +29,9 @@ if __name__ == "__main__":
     arguments = parse_args()
     print(arguments)
 
-    #data_embed = DataEmbeddings(arguments.model_name)
+    data_embed = DataEmbeddings(arguments.model_name)
 
-    if arguments.add_to_db:
-        data_embed = DataEmbeddings(arguments.model_name)
+    if arguments.add_to_db: 
         data_embed.add_embeddings_to_chroma()
  
     
