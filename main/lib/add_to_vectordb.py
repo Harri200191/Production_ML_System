@@ -34,7 +34,6 @@ class DataEmbeddings:
             adds the images and metadata to a ChromaDB collection, and assigns unique IDs to each image.
         """
 
-        data_dict = {}
         list_of_dicts = []
 
         try:
@@ -47,13 +46,17 @@ class DataEmbeddings:
 
         # create metadata dictionary having records of image path and label
         for i in range(len(path_to_images)):
-            data_dict[str(i)] = {"path": path_to_images[i], "label": labels[i]}
-            list_of_dicts.append(data_dict)
-    
+            # Flatten the metadata dictionary so that each entry is a single dictionary with str, int, float, or bool values
+            metadata = {
+                "path": path_to_images[i],
+                "label": labels[i]
+            }
+            list_of_dicts.append(metadata)
+        
         self.collection.add(
             ids=[str(i) for i in range(len(path_to_images))],
-            documents = path_to_images,
-            metadatas = list_of_dicts,
+            documents=path_to_images,
+            metadatas=list_of_dicts,
         )
         
-        print("Added to chroma!") 
+        print("Added to chroma!")

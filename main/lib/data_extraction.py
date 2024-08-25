@@ -33,7 +33,7 @@ class DataExtraction:
         # Create a dictionary to store the mapping
         for value in data.values:
             key = value[0]
-            label = value[1]
+            label = str(value[1])
             mapping[key] = label 
 
         with open(self.configurations.DATASET_CONFIGS["LABELS_DICT_JSON_PATH"], "w") as f:
