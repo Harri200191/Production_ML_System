@@ -34,18 +34,26 @@ class DataEmbeddings:
             adds the images and metadata to a ChromaDB collection, and assigns unique IDs to each image.
         """
 
+        data_dict = {}
+        list_of_dicts = []
+
         try:
             path_to_images, labels = self.data_extraction.read_data(self.configurations.DATASET_CONFIGS["IMAGES_DIR"])
         except FileNotFoundError:
             print("Unexpected!")
             return  
         
-        print("Filled the data. Now adding to chroma........ ")
+        print("Filled the data. Now adding to chroma........ ") 
+
+        # create metadata dictionary having records of image path and label
+        for i in range(len(path_to_images)):
+            data_dict[str(i)] = {"path": path_to_images[i], "label": labels[i]}
+            list_of_dicts.append(data_dict)
     
         self.collection.add(
-            ids=[str(i) for i in path_to_images],
+            ids=[str(i) for i in range(len(path_to_images))],
             documents = path_to_images,
-            metadatas = labels,
+            metadatas = list_of_dicts,
         )
         
         print("Added to chroma!") 

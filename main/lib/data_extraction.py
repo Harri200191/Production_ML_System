@@ -58,7 +58,7 @@ class DataExtraction:
         if not os.path.exists(folder_path):
             raise Exception("Directory not found")
         
-        mappings = self.create_labels_dict(self.configurations.DATASET_CONFIGS["LABELS_TXT_PATH"])
+        mappings = self.create_labels_dict(self.configurations.DATASET_CONFIGS["LABELS_TXT_PATH"]) 
         path_to_image = []
         labels = []
          
@@ -66,9 +66,11 @@ class DataExtraction:
             complete_path = os.path.join(folder_path, file)
  
             for image in os.listdir(complete_path):
-                path_to_image.append(os.path.join(complete_path, image))
-                
-            labels.append(mappings[file])
+                image_path = os.path.join(complete_path, "images")
+
+                for img in os.listdir(image_path):
+                    path_to_image.append(os.path.join(image_path, img)) 
+                    labels.append(mappings[file])
 
         return path_to_image, labels
 
